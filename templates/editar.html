@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Editar Examen</title>
+    <style> 
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            max-width: 500px;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        label { 
+            display: block; 
+            margin-top: 15px; 
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button { 
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background: #2980b9;
+        }
+        .volver {
+            display: inline-block;
+            margin-top: 15px;
+            color: #3498db;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Editar Examen</h1>
+        
+        <form method="POST">
+            <label>Fecha: 
+                <input type="date" name="fecha" value="{{ examen[1] }}" required>
+            </label>
+            
+            <label>Espacio Curricular: 
+                <select name="espacio_curricular" required>
+                    <option value="">Seleccione un espacio curricular</option>
+                    {% for espacio in espacios_curriculares %}
+                    <option value="{{ espacio }}" {% if espacio == examen[2] %}selected{% endif %}>{{ espacio }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+            
+            <label>Año:
+                <select name="anio" required>
+                    <option value="">Seleccione el año</option>
+                    <option value="1° año" {% if examen[3] == '1° año' %}selected{% endif %}>1° año</option>
+                    <option value="2° año" {% if examen[3] == '2° año' %}selected{% endif %}>2° año</option>
+                    <option value="3° año" {% if examen[3] == '3° año' %}selected{% endif %}>3° año</option>
+                    <option value="4° año" {% if examen[3] == '4° año' %}selected{% endif %}>4° año</option>
+                    <option value="5° año" {% if examen[3] == '5° año' %}selected{% endif %}>5° año</option>
+                </select>
+            </label>
+            
+            <label>Horario: 
+                <input type="text" name="horario" value="{{ examen[4] }}" required placeholder="Ej: 09:00 - 11:00">
+            </label>
+            
+            <label>Docente: 
+                <input type="text" name="docente" value="{{ examen[5] }}" required placeholder="Ej: GONZALEZ, MARIA">
+            </label>
+            
+            <br>
+            <button type="submit">💾 Actualizar Examen</button>
+        </form>
+        
+        <br>
+        <a class="volver" href="{{ url_for('index') }}">← Volver al listado</a>
+    </div>
+</body>
+</html>

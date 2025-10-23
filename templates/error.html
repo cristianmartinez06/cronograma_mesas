@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Error</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 40px; 
+            background-color: #f8d7da;
+        }
+        .container { 
+            background: white; 
+            padding: 30px; 
+            border-radius: 8px; 
+            border-left: 4px solid #dc3545;
+            text-align: center;
+        }
+        h1 { 
+            color: #721c24; 
+            margin-bottom: 20px;
+        }
+        p {
+            color: #856404;
+            font-size: 1.1em;
+            margin-bottom: 20px;
+        }
+        .volver { 
+            display: inline-block;
+            padding: 10px 20px;
+            background: #007bff; 
+            color: white; 
+            text-decoration: none; 
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .volver:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>❌ Error</h1>
+        <p>{{ mensaje }}</p>
+        <a class="volver" href="{{ url_for('index') }}">← Volver al inicio</a>
+    </div>
+</body>
+</html>

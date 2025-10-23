@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Cronograma de Exámenes</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 20px; 
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        table { 
+            border-collapse: collapse; 
+            width: 100%; 
+            margin-top: 20px;
+        }
+        th, td { 
+            border: 1px solid #ddd; 
+            padding: 12px; 
+            text-align: left; 
+        }
+        th { 
+            background: #3498db; 
+            color: white;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #e9f7fe;
+        }
+        a.button { 
+            display: inline-block;
+            padding: 10px 15px; 
+            border: none; 
+            background: #3498db; 
+            color: white; 
+            text-decoration: none; 
+            margin-right: 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        a.button:hover {
+            background: #2980b9;
+        }
+        .acciones {
+            margin-bottom: 20px;
+        }
+        .acciones-examen {
+            margin-top: 5px;
+        }
+        .acciones-examen a {
+            color: #3498db;
+            text-decoration: none;
+            margin-right: 10px;
+            font-size: 0.9em;
+        }
+        .acciones-examen a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cronograma de Exámenes</h1>
+        
+        <div class="acciones">
+            <a class="button" href="{{ url_for('agregar') }}">➕ Agregar nuevo examen</a>
+            <a class="button" href="{{ url_for('exportar_pdf') }}">📊 Exportar (PDF o CSV)</a>
+        </div>
+        
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Fecha</th>
+                <th>Espacio Curricular</th>
+                <th>Año</th>
+                <th>Horario</th>
+                <th>Docente</th>
+                <th>Acciones</th>
+            </tr>
+            {% for examen in examenes %}
+            <tr>
+                <td>{{ examen[0] }}</td>
+                <td><strong>{{ examen[1] }}</strong></td>  <!-- Fecha formateada -->
+                <td>{{ examen[2] }}</td>
+                <td>{{ examen[3] }}</td>
+                <td>{{ examen[4] }}</td>
+                <td>{{ examen[5] }}</td>
+                <td class="acciones-examen">
+                    <a href="{{ url_for('editar', id=examen[0]) }}">✏️ Editar</a>
+                    <a href="{{ url_for('eliminar', id=examen[0]) }}" onclick="return confirm('¿Está seguro de que desea eliminar este examen?')">🗑️ Eliminar</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr><td colspan="7" style="text-align: center; padding: 20px;">No hay exámenes registrados.</td></tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>
